@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import React from "react";
-import Header from "../components/Header";
-import Categories from "../components/Categories";
+import { StyleSheet, View } from "react-native";
 
-const Home = ({ handleCategorySelected }) => {
+import Categories from "../components/Categories";
+import Counter from "../components/Counter";
+
+const Home = () => {
   return (
-    <SafeAreaView>
-      <Header title="La Paste de Lucy" />
-      <Categories handleCategorySelected={handleCategorySelected} />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Counter />
+      <Categories />
+    </View>
   );
 };
 

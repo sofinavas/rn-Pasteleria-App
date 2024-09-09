@@ -1,32 +1,37 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import Header from "../components/Header.js";
 import products from "../data/products.json";
 import { colors } from "../global/colors.js";
 import ShadowWrapper from "../components/ShadowWrapper.js";
 
-const ItemDetail = ({ id }) => {
+const ItemDetail = ({ route }) => {
+  const { id } = route.params;
+
+  // Find the product object using the id
+  const product = products.find((item) => item.id === id);
+
+  // Check if the product was found
+  if (!product) {
+    // Handle the case where the product is not found
+    console.error("Product not found");
+    return null; // Or display an error message
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header title="Detalle" />
       <ShadowWrapper style={styles.containerDetail}>
         <Image
           style={styles.image}
           resizeMode="contain"
-          source={{ uri: products.thumbnail }}
+          source={{ uri: product.thumbnail }} // Use product.thumbnail
         />
         <View style={styles.containerText}>
-          <Text style={styles.title}>{products[id].title} </Text>
-          <Text style={styles.description}>{products[id].description}</Text>
-          <Text style={styles.price}>Precio: ${products[id].price}</Text>
-          <Text style={styles.rating}>Rating: {products[id].rating}</Text>
+          <Text style={styles.title}>{product.title} </Text>
+          <Text style={styles.description}>{product.description}</Text>
+          <Text style={styles.price}>Precio:   ${product.price}</Text>
+          <Text style={styles.rating}>Rating:  {product.rating}</Text>
         </View>
         <ShadowWrapper style={styles.containerButton}>
           <Pressable style={styles.button}>
@@ -34,7 +39,7 @@ const ItemDetail = ({ id }) => {
           </Pressable>
         </ShadowWrapper>
       </ShadowWrapper>
-    </SafeAreaView>
+    </View>
   );
 };
 

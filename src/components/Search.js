@@ -17,13 +17,13 @@ const Search = ({ onSearch }) => {
     setError("");
   };
 
-  const searchProducts = () => {
+  const search = () => {
     const regex = /^[a-zA-Z]+$/;
     if (regex.test(input)) {
+      setError("Caracteres no validos");
+    } else {
       setError("");
       onSearch(input);
-    } else {
-      setError("Ingresa solo letras por favor");
     }
   };
 
@@ -38,7 +38,7 @@ const Search = ({ onSearch }) => {
           onChangeText={handleInputChange}
         />
         <View style={styles.buttonContainer}>
-          <Pressable onPress={searchProducts}>
+          <Pressable onPress={search}>
             <AntDesign name="search1" size={26} color={colors.fucsia} />
           </Pressable>
           <Pressable onPress={handleRemoveInput}>

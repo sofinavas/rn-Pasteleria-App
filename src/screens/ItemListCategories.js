@@ -8,56 +8,54 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import products from "../data/products.json";
+
 import Search from "../components/Search";
 import ProductItem from "../components/ProductItem";
 
-const ItemListCategories = ({
-  category,
-  handleCategorySelected,
-  handleProductDetailId,
-}) => {
-  const [productsFilteredByCategory, setProductsFilteredByCategory] = useState(
-    []
-  );
+const ItemListCategories = ({ route }) => {
+  const {
+    data: products,
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+  } = useGetProductsQuery();
+
+  const { category } = route.params;
+  const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
-    setProductsFilteredByCategory(
-      products.filter((product) => product.category === category)
-    );
-  }, [category]);
+    if (isSuccess) {
+      setProductsFiltered(products);
+    }
+  }, [category, isSuccess]);
+
   const onSearch = (input) => {
     if (!input) {
-      setProductsFilteredByCategory(
-        products.filter((product) => product.category === category)
+      setProductsFiltered(
+        productsFiltered.filter((product) => product.category === category)
       );
     } else {
-      setProductsFilteredByCategory(
-        productsFilteredByCategory.filter((product) =>
+      setProductsFiltered(
+        products.filter((product) =>
           product.title.toLowerCase().includes(input.toLowerCase())
         )
       );
     }
+    if (isLoading) return <View>Cargando...</View>;
+    if (isError) return <View>{error.message}</View>;
   };
   return (
-    <SafeAreaView>
-      <Header
-        title={category}
-        handleCategorySelected={handleCategorySelected}
-      />
+    <View>
+      <Header title={category} />
       <Search onSearch={onSearch} />
 
       <FlatList
         data={productsFilteredByCategory}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ProductItem
-            product={item}
-            handleProductDetailId={handleProductDetailId}
-          />
-        )}
+        renderItem={({ item }) => <ProductItem product={item} />}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

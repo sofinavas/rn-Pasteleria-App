@@ -1,22 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import ShadowWrapper from "./ShadowWrapper";
+
 import { colors } from "../global/colors";
-import AntDesign from "@expo/vector-icons/AntDesign";
 
-const Header = ({ title, handleCategorySelected }) => {
+const Header = ({ title }) => {
   return (
-    <ShadowWrapper style={styles.container}>
-      {handleCategorySelected && (
-        <Pressable
-          style={styles.icon}
-          onPress={() => handleCategorySelected("")}
-        >
-          <AntDesign name="back" size={24} color="black" />
-        </Pressable>
-      )}
-
+    <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
-    </ShadowWrapper>
+    </View>
   );
 };
 
@@ -39,9 +29,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     fontFamily: "Playwright",
-  },
-  icon: {
-    position: "absolute",
-    left: 25,
   },
 });

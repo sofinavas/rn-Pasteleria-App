@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": 0,
+      "category": "tortas",
+      "title": "Torta de Chocolate",
+      "description": "Deliciosa torta de chocolate con capas de ganache y mousse.",
+      "price": 25.0,
+      "discountPercentage": 10,
+      "quantity": 2,
+      "rating": 4.8,
+      "stock": 20,
+      "thumbnail": "https://i.ibb.co/Qnsq9sg/marquise-entera.jpg",
+      "images": [
+        "torta_chocolate_1.jpg",
+        "torta_chocolate_2.jpg",
+        "torta_chocolate_3.jpg",
+        "torta_chocolate_4.jpg",
+        "torta_chocolate_5.jpg"
+      ]
+    },
+    {
+      "id": 1,
+      "category": "tortas",
+      "title": "Torta de Vainilla",
+      "description": "Esponjosa torta de vainilla con crema de mantequilla y fresas.",
+      "price": 22.0,
+      "discountPercentage": 15,
+      "quantity": 3,
+      "rating": 4.7,
+      "stock": 15,
+      "thumbnail": "torta_vainilla_thumb.jpg",
+      "images": [
+        "torta_vainilla_1.jpg",
+        "torta_vainilla_2.jpg",
+        "torta_vainilla_3.jpg",
+        "torta_vainilla_4.jpg",
+        "torta_vainilla_5.jpg"
+      ]
+    }
+  ],
+  "total": 50
+}
