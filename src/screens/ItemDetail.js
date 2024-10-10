@@ -1,22 +1,22 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import React from "react";
-import Header from "../components/Header.js";
-import products from "../data/products.json";
+import { addItemCart } from "../features/cart/cartSlice.js"; //es la funcion que cree y necesito el dispatch para poider usarla
+import { useDispatch } from "react-redux";
+import {useNavigation} from `@react-navigation/native`;
+import { useGetProductQuery } from "../services/shop.js";
 import { colors } from "../global/colors.js";
-import ShadowWrapper from "../components/ShadowWrapper.js";
+
 
 const ItemDetail = ({ route }) => {
-  const { id } = route.params;
+  const { id } = route.params
+  const {data: product, isLoading} =useGetProductQuery(id)
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
 
-  // Find the product object using the id
-  const product = products.find((item) => item.id === id);
-
-  // Check if the product was found
-  if (!product) {
-    // Handle the case where the product is not found
-    console.error("Product not found");
-    return null; // Or display an error message
-  }
+ const handleAddItemCart = () => { //creo una fn para agregar items al cart
+  dispatch(addItemCart({...product, quantity:1}))// le agrego un objeto que contenga todo lo que tiene el producto + la cantidad
+  navigation.navigate("CartStack") // una vez que agrego el prod, navego a CartStack para ver el prod en el carrito.
+ }
+ if (isLoading) return <LoadingSpinner/>
 
   return (
     <View style={styles.container}>
