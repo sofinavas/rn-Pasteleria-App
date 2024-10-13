@@ -1,5 +1,7 @@
 import {object, string} from 'yup'
 
+//instalo libreria para validaciones: npm i yup 
+
 export const loginSchema = object ({
     password: string()
     .required('Se requiere un password')

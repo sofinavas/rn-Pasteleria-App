@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { colors } from "./src/global/colors";
 import { useFonts } from "expo-font";
 import { fonts } from "./src/global/fonts";
-import MainNavigatorNavigator from "./src/navigation/MainNavigator";
+import MainNavigator from "./src/navigation/MainNavigator";
 import { store } from "./src/app/store";
 import { Provider } from "react-redux";
 import { init } from "./src/db";

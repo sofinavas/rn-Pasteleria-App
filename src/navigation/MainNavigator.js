@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet } from "react-native";
+import {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import TabNavigator from "./TabNavigator";

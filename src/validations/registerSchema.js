@@ -1,4 +1,4 @@
-import {object, string} from 'yup'
+import {object, ref, string} from 'yup'
 
 export const registerSchema = object ({
     confirmPassword: string()

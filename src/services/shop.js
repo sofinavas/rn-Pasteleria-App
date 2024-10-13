@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { URL_FIREBASE } from "../firebase/database";
 
+//Aquí hago las peticiones CRUD con Redux para traer de la DB de Firebase
+
 export const shopApi = createApi({
   reducerPath: "shopApi", //nombre
   baseQuery: fetchBaseQuery({ baseUrl: URL_FIREBASE }), //URL base
+  tagTypes: ['userImage', 'order'], //para que los actualice cuando hago un cambio
   endpoints: (builder) => ({ // una funcion que retorna un objeto
     getCategories: builder.query({
       query: () => "/categories.json", //la query es una funcion que retorna la URL que yo quiero.
@@ -48,30 +51,23 @@ export const shopApi = createApi({
       }),
       invalidatesTags:['userImage']
     }),
-    postUserLocation:builder.mutation({
-      query:({localId, userLocation}) => ({
-        url:`/users/${localId}/locations.json`,
-        method: 'POST',
-        body:userLocation
-      }),
-      invalidatesTags:["userLocation"]
-    }),
+    
 
     getUser: builder.query({
       query:({localId}) => `users/${localId}.json`,
       transformResponse:(response) => {
 
-        if(!response) return {image:'',locations:[]}
-        if(!response.locations) response.locations = []
+        if(!response) return {image:''}
+
         if (!response.image) response.image = ''
 
-        const data= Object.entries(response.locations).map(item => ({id:item[0], ...item [1]}))
+        const data= Object.entries(response).map(item => ({id:item[0], ...item [1]}))
         return{
           ...response,
-          locations:data
+          
         }
       },
-      providesTags: ['userImage','userLocation']
+      providesTags: ['userImage']
     })
   }),
 });
@@ -82,7 +78,7 @@ export const { useGetCategoriesQuery,
   usePostOrderMutation, 
   useGetOrdersByUserQuery, 
   usePatchImageProfileMutation,
-  usePostUserLocationMutation,
+  
   useGetUserQuery,
   useGetOrderByUserQuery
 } = shopApi;

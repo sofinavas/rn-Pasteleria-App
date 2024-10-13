@@ -19,7 +19,7 @@ const Search = ({ onSearch }) => {
 
   const search = () => {
     const regex = /^[a-zA-Z]+$/;
-    if (regex.test(input)) {
+    if (!regex.test(input)) {
       setError("Caracteres no validos");
     } else {
       setError("");
