@@ -3,6 +3,7 @@ import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { useGetUserQuery } from '../services/shop'
 import SubmitButton from '../components/SubmitButton'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const MyProfile = ({navigation}) => {
     const localId = useSelector(state=> state.auth.localId)
@@ -19,7 +20,7 @@ const MyProfile = ({navigation}) => {
       source = {user.image ?
         {uri:user.image}
         :
-        require()//agrego la ruta a la imagen por default                            
+        require(<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons </a>)//agrego la ruta a la imagen por default                            
       }
       resizeMode='cover'
       style={styles.image}
@@ -44,7 +45,7 @@ export default MyProfile
 const styles = StyleSheet.create({
     container:{
         marginTop:70,
-        alignItems:'center'
+        alignItems:'center',
         gap:20
     },
     image:{

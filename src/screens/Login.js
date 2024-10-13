@@ -50,7 +50,7 @@ const Login = ({navigation}) => {
             label="Email"
             value={email}
             onChangeText={(t)=> setEmail(t)}
-            isSecure={false}
+            isSecure={false} // es para que muestre el texto o solo puntitos
             error={errorEmail}
             />
             <InputForm

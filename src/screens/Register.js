@@ -86,7 +86,7 @@ const Register = ({navigation}) => {
   )
 }
 
-export default Login
+export default Register
 
 const styles = StyleSheet.create({
     main:{

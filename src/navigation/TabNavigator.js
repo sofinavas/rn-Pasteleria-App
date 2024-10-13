@@ -49,6 +49,18 @@ const TabNavigator = () => {
             },
           }}
         />
+    <Tab.Screen
+          name="ProfileStack"
+          component={ProfileStack}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <TabBarIcon focused={focused} text="Perfil" icon="user" />
+              );
+            },
+          }}
+        />
+
       </Tab.Navigator>
 
     )

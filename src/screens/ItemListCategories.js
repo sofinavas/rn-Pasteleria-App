@@ -1,27 +1,20 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-} from "react-native";
+import { FlatList, StyleSheet,Text, View, } from "react-native";
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
-
-import Search from "../components/Search";
+import Search from '../components/Search'
 import ProductItem from "../components/ProductItem";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { useGetProductsQuery } from "../services/shop";
 
 const ItemListCategories = ({ route }) => {
+  const {category} = route.params
   const {
     data: products,
     isSuccess,
     isLoading,
     isError,
     error,
-  } = useGetProductsQuery();
+  } = useGetProductsQuery(category);
 
-  const { category } = route.params;
   const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
@@ -31,33 +24,29 @@ const ItemListCategories = ({ route }) => {
   }, [category, isSuccess]);
 
   const onSearch = (input) => {
-    if (!input) {
-      setProductsFiltered(
-        productsFiltered.filter((product) => product.category === category)
-      );
+    if (input) {
+      setProductsFiltered(productsFiltered.filter((product) => product.title.includes(input))
+      )
     } else {
-      setProductsFiltered(
-        products.filter((product) =>
-          product.title.toLowerCase().includes(input.toLowerCase())
-        )
-      );
+      setProductsFiltered(products )}
+      
     }
-    if (isLoading) return <View>Cargando...</View>;
-    if (isError) return <View>{error.message}</View>;
+    if (isLoading) return <LoadingSpinner/>
+    if (isError) return <View><Text>{error.message}</Text></View>;
   };
   return (
-    <View>
-      <Header title={category} />
+    <View style= {styles.container}>
+      
       <Search onSearch={onSearch} />
 
       <FlatList
-        data={productsFilteredByCategory}
+        data={productsFiltered}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <ProductItem product={item} />}
       />
     </View>
-  );
-};
+  )
+}
 
 export default ItemListCategories;
 
