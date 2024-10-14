@@ -7,6 +7,7 @@ import SubmitButton from '../components/SubmitButton'
 import { colors } from '../global/colors'
 import { loginSchema } from '../validations/loginSchema'
 import { useLoginMutation } from '../services/auth'
+import { insertSession } from '../db'
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState("")
@@ -19,13 +20,17 @@ const Login = ({ navigation }) => {
     const onSubmit = async () => {
         try {
             loginSchema.validateSync({ email, password })
-            const { data } = await triggerLogin({ email, password })
-            insertSession(data)
+            const { data } = await triggerLogin({ email, password });
+            if (data && data.email && data.idToken && data.localId){
+            await insertSession(data)
             dispatch(setUser({
                 email: data.email,
                 idToken: data.idToken,
                 localId: data.localId
-            }))
+            }));
+        } else{
+                console.error('Error: Invalid response from server');
+            }
         } catch (error) {
             console.log(error)
             switch (error.path) {

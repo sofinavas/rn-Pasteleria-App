@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import TabNavigator from "./TabNavigator";
 import AuthStack from "./AuthStack";
+import { fetchSession } from "../db";
 
 
 
