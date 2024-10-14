@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, KeyboardAvoidingView, Platform } from 'react-native'
 import {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../features/auth/authSlice'
@@ -6,10 +6,12 @@ import InputForm from '../components/InputForm'
 import SubmitButton from '../components/SubmitButton'
 import { colors } from '../global/colors'
 import { registerSchema } from '../validations/registerSchema'
+import { useRegisterMutation } from '../services/auth'
 
 const Register = ({navigation}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
     const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
@@ -52,7 +54,11 @@ const Register = ({navigation}) => {
     }
 
   return (
-    <View style= {styles.main}>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+style= {styles.main}>
+   
+     
         <View style= {styles.container}>
             <InputForm
             label="Email"
@@ -82,7 +88,7 @@ const Register = ({navigation}) => {
          </Pressable>
         </View>
      
-    </View>
+        </KeyboardAvoidingView>
   )
 }
 

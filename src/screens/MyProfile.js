@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View, KeyboardAvoidingView, Platform, Image } from 'react-native'
 import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { useGetUserQuery } from '../services/shop'
@@ -15,12 +15,16 @@ const MyProfile = ({navigation}) => {
 
     if(isLoading) return<LoadingSpinner/>
   return (
-    <View style= {styles.container}>
+    <KeyboardAvoidingView
+behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+style= {styles.container}
+>
+    
       <Image
-      source = {user.image ?
+      source = {user?.image ?
         {uri:user.image}
         :
-        require(<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons </a>)//agrego la ruta a la imagen por default                            
+        require('../../assets/iconos/user.png')//agrego la ruta a la imagen por default                            
       }
       resizeMode='cover'
       style={styles.image}
@@ -28,15 +32,9 @@ const MyProfile = ({navigation}) => {
         <SubmitButton title= "Agregar imagen de perfil" 
         onPress={()=> navigation.navigate('ImageSelector')}
         />
-        <SubmitButton title= "Agregar ubicación"
-        onPress={()=> navigation.navigate("LocationSelector")}
-        />
-        <FlatList
-        data= {user.locations}
-        keyExtractor= {item => item.id}
-        renderItem = {({item}) => <View> <Text> {item.address} </Text> </View> }
-        />
-    </View>
+       
+    
+    </KeyboardAvoidingView>
   )
 }
 

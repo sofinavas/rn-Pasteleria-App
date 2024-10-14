@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, KeyboardAvoidingView, Platform } from 'react-native'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../features/auth/authSlice'
@@ -49,7 +49,14 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.main}>
+        
+        <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.main}
+        >
+
+       
+      
             <View style={styles.container}>
                 <InputForm
                     label="Email"
@@ -77,7 +84,7 @@ const Login = ({ navigation }) => {
                     <Text style={styles.subLink}>Registro</Text>
                 </Pressable>
             </View>
-        </View>
+            </KeyboardAvoidingView>
     )
 }
 

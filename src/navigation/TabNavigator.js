@@ -1,4 +1,10 @@
 import { StyleSheet } from "react-native"
+import ShopStack from './ShopStack'
+import CartStack from './CartStack'
+import OrdersStack from './OrdersStack'
+import { colors } from "../global/colors"
+import TabBarIcon from '../components/TabBarIcon'
+import ProfileStack from "./ProfileStack"
 import {createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 

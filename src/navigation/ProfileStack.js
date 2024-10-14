@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, } from 'react-native'
 import Header from '../components/Header'
 import MyProfile from '../screens/MyProfile'
 import ImageSelector from '../screens/ImageSelector'
-const Stack= createNativeStackNavigator
+const Stack= createNativeStackNavigator()
 
 
 const ProfileStack = () => {

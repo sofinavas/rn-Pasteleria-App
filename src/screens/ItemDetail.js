@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { addItemCart } from "../features/cart/cartSlice.js"; //es la funcion que cree y necesito el dispatch para poider usarla
 import { useDispatch } from "react-redux";
-import {useNavigation} from `@react-navigation/native`;
+import {useNavigation} from '@react-navigation/native';
 import { useGetProductQuery } from "../services/shop.js";
 import { colors } from "../global/colors.js";
 

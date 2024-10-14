@@ -1,18 +1,19 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-
+import { FlatList, StyleSheet} from "react-native";
 import Category from "./Category";
-
 import { useGetCategoriesQuery } from "../services/shop";
+import LoadingSpinner from "./LoadingSpinner";
 const Categories = () => {
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading } = useGetCategoriesQuery();
+
+  if (isLoading) return <LoadingSpinner/>
   return (
-    <View>
+    
       <FlatList
         data={categories}
         keyExtractor={(item) => item}
         renderItem={({ item }) => <Category item={item} />}
       />
-    </View>
+
   );
 };
 

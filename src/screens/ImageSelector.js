@@ -37,7 +37,7 @@ const confirmImage = () => {
 return (
     <View style={styles.container} >
         <Image
-        source={image ? {uri:image} : require ()} //agregar la ruta a la imagen por default
+        source={image ? {uri:image} : require ('../../assets/iconos/user.png')} //agregar la ruta a la imagen por default
         resizeMode= 'cover'
         style= {styles.image}
         />
