@@ -4,41 +4,74 @@ import { useDispatch } from "react-redux";
 import {useNavigation} from '@react-navigation/native';
 import { useGetProductQuery } from "../services/shop.js";
 import { colors } from "../global/colors.js";
+import LoadingSpinner from "../components/LoadingSpinner.js";
 
+import {useEffect, useState} from 'react'
 
 const ItemDetail = ({ route }) => {
   const { id } = route.params
-  const {data: product, isLoading} =useGetProductQuery(id)
+  const {data: apiResponse, isLoading, isSuccess, isError, error} =useGetProductQuery(id)
+  const [product, setProduct] = useState(null)
   const navigation = useNavigation()
   const dispatch = useDispatch()
 
  const handleAddItemCart = () => { //creo una fn para agregar items al cart
-  dispatch(addItemCart({...product, quantity:1}))// le agrego un objeto que contenga todo lo que tiene el producto + la cantidad
+  if (product){
+    dispatch(addItemCart({...product, quantity:1}))// le agrego un objeto que contenga todo lo que tiene el producto + la cantidad
   navigation.navigate("CartStack") // una vez que agrego el prod, navego a CartStack para ver el prod en el carrito.
  }
+  }
+  useEffect(() => {
+    if (isSuccess){
+      console.log('API Response:', apiResponse)
+
+      const productData = apiResponse?.product || apiResponse?.items?.[0] || apiResponse;
+      setProduct(productData);
+    } else if (isError){
+      console.error('Error fetching product', error);
+    }
+  }, [apiResponse, isSuccess, isError])
+
+   // Mostrar un mensaje de error si no se encuentra el producto
+   if (!product && isSuccess) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Producto no encontrado.</Text>
+      </View>
+    );
+  }
+  
  if (isLoading) return <LoadingSpinner/>
+
 
   return (
     <View style={styles.container}>
-      <Header title="Detalle" />
-      <ShadowWrapper style={styles.containerDetail}>
-        <Image
-          style={styles.image}
-          resizeMode="contain"
-          source={{ uri: product.thumbnail }} // Use product.thumbnail
-        />
-        <View style={styles.containerText}>
+      <View style = {styles.containerDetail}>
+        <View style={styles.imageContainer}>
+              {product?.thumbnail ? (
+              <Image
+              style={styles.image}
+              resizeMode="contain"
+              source={{ uri: product.thumbnail }}
+              />
+              ) : (
+              <Text style={styles.noImageText}>No hay imagen disponible</Text>
+                )}
+        </View>
+
+        <View style= {styles.containerText}>
+      
           <Text style={styles.title}>{product.title} </Text>
           <Text style={styles.description}>{product.description}</Text>
           <Text style={styles.price}>Precio:   ${product.price}</Text>
-          <Text style={styles.rating}>Rating:  {product.rating}</Text>
+         
         </View>
-        <ShadowWrapper style={styles.containerButton}>
-          <Pressable style={styles.button}>
+        
+          <Pressable style={styles.button} onPress={handleAddItemCart}>
             <Text style={styles.buttonText}>Comprar</Text>
           </Pressable>
-        </ShadowWrapper>
-      </ShadowWrapper>
+      
+    </View>
     </View>
   );
 };

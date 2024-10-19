@@ -13,7 +13,7 @@ export const shopApi = createApi({
     }),
     getProducts: builder.query({
       query: (category) => //le agrego la query para que filtre por categoria 
-        `"/products.json?orderBy="category"&equalTo="${category}"`, //query que ordena los productos por categoria y filtra por la categoria - viene de firebase
+        `/products.json?orderBy="category"&equalTo="${category}"`, //query que ordena los productos por categoria y filtra por la categoria - viene de firebase
       transformResponse: (response) => { // esto es una funcion que recibe la respuesta y la transforma en un array (yo necesito pasarle un array a la Flatlilst para que lo pueda reconocer)
         const data = Object.values(response);
         return data;

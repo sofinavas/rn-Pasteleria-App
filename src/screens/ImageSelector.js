@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import SubmitButton from '../components/SubmitButton'
 import * as ImagePicker from 'expo-image-picker'
 import {useState, useEffect}from 'react'

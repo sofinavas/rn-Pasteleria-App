@@ -1,5 +1,5 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import cart from "../data/cart.json";
+
 import CartItem from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { usePostOrderMutation } from "../services/shop";
@@ -8,7 +8,7 @@ import { colors } from "../global/colors";
 
 const Cart = ({navigation}) => {
 const cart= useSelector(state => state.cart)
-const localId = useSelector(state.auth.localId)
+const localId = useSelector(state=> state.auth.localId)
 const [triggerPostOrder] = usePostOrderMutation()
 const dispatch =useDispatch()
 
@@ -22,7 +22,7 @@ const handleAddOrder = () => {
   dispatch(clearCart())
   navigation.navigate('OrdersStack')
 }
-if (cart.total === 0) return <View><Text>El carrito está vacío</Text></View>
+if (cart?.total === 0) return <View><Text>El carrito está vacío</Text></View>
 
   return (
     <View style={styles.container}>
