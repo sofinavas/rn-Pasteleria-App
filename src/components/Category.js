@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+
 import ShadowWrapper from "./ShadowWrapper";
 import { colors } from "../global/colors";
 import { useNavigation } from "@react-navigation/native";
@@ -17,13 +17,17 @@ const Category = ({ item }) => {
   );
 };
 
+
+
+
+
 export default Category;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.whiteTransparentLight,
-    width: "90%",
-    marginHorizontal: "5%",
+    backgroundColor: colors.fucsia,
+    width: "80%",
+    marginHorizontal: "10%",
     marginVertical: 10,
     padding: 20,
     justifyContent: "center",
@@ -31,6 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
+    fontFamily: "Playwright"
   },
 });

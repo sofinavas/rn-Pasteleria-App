@@ -6,21 +6,22 @@ import { URL_FIREBASE } from "../firebase/database";
 export const shopApi = createApi({
   reducerPath: "shopApi", //nombre
   baseQuery: fetchBaseQuery({ baseUrl: URL_FIREBASE }), //URL base
-  tagTypes: ['userImage', 'order'], //para que los actualice cuando hago un cambio
+  tagTypes: ['userImage', 'order', ], //para que los actualice cuando hago un cambio
   endpoints: (builder) => ({ // una funcion que retorna un objeto
     getCategories: builder.query({
-      query: () => "/categories.json", //la query es una funcion que retorna la URL que yo quiero.
+      query: () => "categories.json", //la query es una funcion que retorna la URL que yo quiero.
     }),
-    getProducts: builder.query({
-      query: (category) => //le agrego la query para que filtre por categoria 
-        `/products.json?orderBy="category"&equalTo="${category}"`, //query que ordena los productos por categoria y filtra por la categoria - viene de firebase
-      transformResponse: (response) => { // esto es una funcion que recibe la respuesta y la transforma en un array (yo necesito pasarle un array a la Flatlilst para que lo pueda reconocer)
+    getProducts:builder.query({
+      query: (category) => 
+      `products.json?orderBy="category"&equalTo="${category}"`,
+       transformResponse:(response) => { // esto es una funcion que recibe la respuesta y la transforma en un array (yo necesito pasarle un array a la Flatlilst para que lo pueda reconocer)
         const data = Object.values(response);
-        return data;
-      },
+        console.log(data)
+        return data
+      }
     }),
     getProduct: builder.query({
-      query:(id) =>`/products/${id}.json` //me comunico con la DB solo con  el id del producto
+      query:(id) =>`products/${id}.json` //me comunico con la DB solo con  el id del producto
     }),
     getOrdersByUser: builder.query({
       query:(localId) => `/orders/${localId}.json`,
@@ -78,7 +79,6 @@ export const { useGetCategoriesQuery,
   usePostOrderMutation, 
   useGetOrdersByUserQuery, 
   usePatchImageProfileMutation,
-  
   useGetUserQuery,
   useGetOrderByUserQuery
 } = shopApi;

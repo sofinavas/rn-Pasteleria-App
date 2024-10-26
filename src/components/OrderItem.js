@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../global/colors";
-import { date } from "yup";
+
 
 const OrderItem = ({ item }) => {
 
@@ -14,7 +14,10 @@ const OrderItem = ({ item }) => {
         <Text style={styles.date}>{item.createdAt}</Text>
         <Text style={styles.total}> Total: $ {item.total}</Text>
       </View>
-      <AntDesign name="search1" size={24} color="black" />
+      <Pressable onPress={() => navigation.navigate("OrderDetail", {id:item.id})} >
+         <AntDesign name="search1" size={24} color="black" />
+      </Pressable>
+     
     </View>
   );
 };
@@ -22,7 +25,7 @@ const OrderItem = ({ item }) => {
 export default OrderItem;
 
 const styles = StyleSheet.create({
-  conatiner:{
+  container:{
     borderColor:colors.greyDark,
     borderWidth:2,
     width:'90%',

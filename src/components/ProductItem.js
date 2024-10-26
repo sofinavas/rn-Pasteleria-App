@@ -15,7 +15,7 @@ const ProductItem = ({ product }) => {
   return (
     <Pressable
       style={styles.container}
-      onPress={() => navigation.navigate("Detail", { id: product.id })}
+      onPress={() => navigation.navigate("Detail", { id:product.id })}
     >
       <Text
         style={[styles.title, width < 300 ? styles.titleMin : styles.titleMax]}

@@ -28,8 +28,8 @@ const ShopStack = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Products" component={ItemDetail} />
-      <Stack.Screen name="Detail" component={ItemListCategories} />
+      <Stack.Screen name="Products" component={ItemListCategories} />
+      <Stack.Screen name="Detail" component={ItemDetail} />
     </Stack.Navigator>
   );
 };

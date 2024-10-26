@@ -7,6 +7,8 @@ import { useGetProductsQuery } from "../services/shop";
 
 const ItemListCategories = ({ route }) => {
   const { category } = route.params;
+  console.log("Category param: ", category);
+  
   const {
     data: products,
     isSuccess,
@@ -14,12 +16,16 @@ const ItemListCategories = ({ route }) => {
     isError,
     error,
   } = useGetProductsQuery(category);
+  
+  console.log("Products: ", products);
 
   const [productsFiltered, setProductsFiltered] = useState([]);
 
   useEffect(() => {
-    if (isSuccess) {
-      setProductsFiltered(products || []);
+    console.log("isSuccess:", isSuccess);
+    console.log("products:", products);
+    if (isSuccess && products) {
+      setProductsFiltered(products);
     }
   }, [category, isSuccess]);
 
@@ -27,13 +33,15 @@ const ItemListCategories = ({ route }) => {
     if (input) {
       setProductsFiltered(productsFiltered.filter((product) => product.title.includes(input)));
     } else {
-      setProductsFiltered(products || []);
+      setProductsFiltered(products);
     }
   };
 
-  // Mover estos checks aquí
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <View><Text>{error.message}</Text></View>;
+  if (isError) {
+    console.error("Error al obtener productos:", error);
+    return <View><Text>Error: {error.message}</Text></View>;
+  }
 
   return (
     <View style={styles.container}>
@@ -46,6 +54,7 @@ const ItemListCategories = ({ route }) => {
     </View>
   );
 };
+
 
 export default ItemListCategories;
 
