@@ -7,9 +7,14 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 const Orders = () => {
   const localId = useSelector(state => state.auth.localId);
-  const { data:orders, isLoading } = useGetOrdersByUserQuery(localId);
+  const { data:orders = [], isLoading, isError, error } = useGetOrdersByUserQuery(localId);
 
   if (isLoading) return <LoadingSpinner />;
+
+  if (isError) {
+    console.log("Error fetching orders:", error);
+    return <Text>Error al cargar las órdenes</Text>;
+  }
 
 if (orders.length === 0) return <View><Text>Vacío</Text></View>
 

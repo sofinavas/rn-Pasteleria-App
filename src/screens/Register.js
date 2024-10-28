@@ -15,7 +15,7 @@ const Register = ({navigation}) => {
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
     const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
-    const [triggerRegister, {data,isSucces, isError, error}] = useRegisterMutation()
+    const [triggerRegister, {data,isSucces}] = useRegisterMutation()
     const dispatch = useDispatch()
 
     const onSubmit = async()=> {
@@ -81,10 +81,10 @@ style= {styles.main}>
             isSecure={true}
             error={errorConfirmPassword}
             />
-        <SubmitButton onPress={onSubmit} title='Iniciar Sesión'/>
-         <Text style={styles.sub}>No tenés una cuenta?</Text>
-         <Pressable onPress={()=> navigation.navigate('Register')}>
-            <Text style={styles.subLink}>Registro</Text>
+        <SubmitButton onPress={onSubmit} title='Registrarme'/>
+         <Text style={styles.sub}>Ya tenés una cuenta?</Text>
+         <Pressable onPress={()=> navigation.navigate('Login')}>
+            <Text style={styles.subLink}>Inicio de sesion</Text>
          </Pressable>
         </View>
      

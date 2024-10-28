@@ -5,9 +5,9 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const Categories = () => {
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
-  console.log("Categories data:", categories);
+  
   if (isLoading) return <LoadingSpinner/>
-  console.log('Categories data:', categories)
+ 
 
   if(error){
     return <Text>Error al cargar las categorias: {error.message}</Text>

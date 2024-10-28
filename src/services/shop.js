@@ -16,7 +16,7 @@ export const shopApi = createApi({
       `products.json?orderBy="category"&equalTo="${category}"`,
        transformResponse:(response) => { // esto es una funcion que recibe la respuesta y la transforma en un array (yo necesito pasarle un array a la Flatlilst para que lo pueda reconocer)
         const data = Object.values(response);
-        console.log(data)
+        
         return data
       }
     }),

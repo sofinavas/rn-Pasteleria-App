@@ -3,6 +3,7 @@ import { StyleSheet, } from 'react-native'
 import Header from '../components/Header'
 import MyProfile from '../screens/MyProfile'
 import ImageSelector from '../screens/ImageSelector'
+import ProfileImage from '../screens/ProfileImage'
 const Stack= createNativeStackNavigator()
 
 
@@ -20,6 +21,7 @@ const ProfileStack = () => {
     >
         <Stack.Screen name = 'MyProfile' component= {MyProfile}/>
         <Stack.Screen name = 'ImageSelector' component= {ImageSelector}/>
+        <Stack.Screen name='ProfileImage' component={ProfileImage } />
     </Stack.Navigator>
   )
 }

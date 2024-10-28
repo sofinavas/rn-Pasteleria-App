@@ -14,7 +14,7 @@ const handleAddItemCart = () => { dispatch(addItemCart({...product,quantity:1}))
 navigation.navigate("CartStack")
 }
 if(isLoading) return <LoadingSpinner/>
-console.log("Product ID:", id);
+
 
 return (
   <View style={styles.container}>
@@ -27,7 +27,7 @@ return (
       <View style={styles.containerText}>
         <Text style={styles.title}>{product.title}</Text>
         <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.price}>Precio: {product.price} $</Text>
+        <Text style={styles.price}>Precio: $ {product.price} </Text>
       </View>
       <Pressable style={styles.button} onPress={handleAddItemCart}>
         <Text style={styles.buttonText}>Comprar</Text>

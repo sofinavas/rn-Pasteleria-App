@@ -7,7 +7,7 @@ import { useGetProductsQuery } from "../services/shop";
 
 const ItemListCategories = ({ route }) => {
   const { category } = route.params;
-  console.log("Category param: ", category);
+  
   
   const {
     data: products,

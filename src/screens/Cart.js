@@ -22,7 +22,7 @@ const handleAddOrder = () => {
   dispatch(clearCart())
   navigation.navigate('OrdersStack')
 }
-if (cart?.total === 0) return <View><Text>El carrito está vacío</Text></View>
+if (cart.total === 0) return <View><Text>El carrito está vacío</Text></View>
 
   return (
     <View style={styles.container}>
@@ -37,7 +37,6 @@ if (cart?.total === 0) return <View><Text>El carrito está vacío</Text></View>
 
     </Pressable>
 
-     
         <Text style={styles.textConfirm}>Total: $ {cart.total}</Text>
       </View>
     </View>
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     flex:1
   },
   containerConfirm:{
-    backgroundColor: colors.mainDark,
+    backgroundColor: colors.main,
     padding: 20,
     flexDirection:"row",
     justifyContent:"space-between"

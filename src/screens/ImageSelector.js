@@ -31,8 +31,10 @@ const ImageSelector = ({navigation}) => {
 }
 
 const confirmImage = () => {
+    console.log("Imagen que se va a enviar:", image);
+    console.log("localId que se va a enviar:", localId);
     triggerAddImageProfile({image, localId})
-    navigation.navigate("MyProfile")
+    navigation.navigate("ProfileImage")
 }
 return (
     <View style={styles.container} >
