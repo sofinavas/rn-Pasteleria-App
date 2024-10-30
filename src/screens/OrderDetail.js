@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useGetOrderByUserQuery } from '../services/shop'
+import React, {useEffect} from 'react'
 
 
 const OrderDetail = ({route}) => {

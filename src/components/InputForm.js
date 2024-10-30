@@ -12,8 +12,8 @@ const InputForm = ({label, value, onChangeText, isSecure, error}) => {
         style={styles.input}
         secureTextEntry={isSecure}
       />
-     
-        <Text style={styles.error}>{error? error : ""}</Text> 
+     <View><Text style={styles.error}>{error? error : ""}</Text></View>
+         
       </View>
  
   )

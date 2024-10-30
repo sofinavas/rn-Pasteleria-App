@@ -44,7 +44,7 @@ export const shopApi = createApi({
       invalidatesTags:["order"]
     }),
 
-    patchImageProfile: builder.mutation({
+    patchImageProfile:builder.mutation({
       query:({image, localId}) => ({
         url:`users/${localId}.json`,
         method: 'PATCH',
@@ -58,15 +58,13 @@ export const shopApi = createApi({
       query:({localId}) => `users/${localId}.json`,
       transformResponse:(response) => {
 
-        if(!response) return {image:''}
+        if(!response) return {image:''};
 
-        if (!response.image) response.image = ''
+        if (!response.image) response.image = '';
 
-        const data= Object.entries(response).map(item => ({id:item[0], ...item [1]}))
-        return{
-          ...response,
+        return response;
           
-        }
+        
       },
       providesTags: ['userImage']
     })

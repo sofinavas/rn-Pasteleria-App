@@ -9,6 +9,10 @@ import { store } from "./src/app/store";
 import { Provider } from "react-redux";
 import { init } from "./src/db";
 
+
+
+
+
 export default function App() {
 
   init()
